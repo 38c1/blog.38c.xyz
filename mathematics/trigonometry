@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometry in Desmos</title>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+        /* General Body Style */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        /* Top Bar Style */
+        div.topbar {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            box-shadow: #0003 0 5px 5px;
+            background-color: #fff;
+        }
+
+        div.topbar img {
+            height: 60px;
+            width: 60px;
+            margin: 10px;
+        }
+
+        div.topbar a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            min-height: 1em;
+            width: 120px;
+        }
+
+        div.topbar a:first-of-type {
+            margin-left: auto;
+            color: #000;
+        }
+
+        div.topbar a:nth-of-type(2) {
+            background-color: #00e;
+            color: #fff;
+        }
+
+        /* Content Style */
+        .content {
+            margin: 20px;
+        }
+
+        .formula {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar Section -->
+    <div class="topbar">
+        <img alt="" src="/pizza-cat.png">
+        <a data-discover="true" aria-current="page" href="/">Index</a>
+        <a data-discover="true" aria-current="page" href="/about">About</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <h1>Trigonometry in Desmos</h1>
+        <p>Complex trigonometry inside of Desmos.</p>
+
+        <img src="https://img.shields.io/badge/Article_Version-1.2-blue" alt="Version">
+        <img src="https://img.shields.io/badge/Article_Packages-mathjax@3,_markdown-blue" alt="Packages">
+        <img src="https://img.shields.io/badge/Application-Desmos-darkgreen" alt="Application">
+
+        <ul>
+            <li>This article covers the incircle of a triangle</li>
+            <li>This article covers the circumcircle of a triangle</li>
+        </ul>
+
+        <blockquote>
+            For the finished version, visit this Desmos graph <a href="https://www.desmos.com/calculator/pxm5incqpq">here</a>. (or view the graph below)
+        </blockquote>
+
+        <iframe src="https://www.desmos.com/calculator/2ebpr1rhs5?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+
+        <hr>
+
+        <h2>Defining Points</h2>
+        <p>To start, you need to define the points of the triangle. For consistency, variables the user defines will be lowercase and all other variables will be uppercase.</p>
+        <p>Define them as  \(a\), \(b\), and \(c\).</p>
+
+        <div class="formula">
+            \[a=(0,0)\]
+            \[b=(0,0)\]
+            \[c=(0,0)\]
+        </div>
+        <p>Ensure these points are draggable in the editor.</p>
+
+        <hr>
+
+        <h2>Creating the Triangle</h2>
+        <p>Create a polygon. This will be the outline of the triangle.</p>
+        <div class="formula">
+        \[polygon(a,b,c)\]
+        </div>
+        <p>Optionally, you can also add the centroid with the following calculation.</p>
+        <div class="formula">
+        \[mean(a,b,c)\]
+        </div>
+
+        <hr>
+
+        <h2>Incircle Calculations</h2>
+        <p>We can now calculate the incircle. We need to calculate the incircle points first.</p>
+        <p>Define them as \(A_i\), \(B_i\), and \(C_i\).</p>
+        <div class="formula">
+            \[A_{i}=\sqrt{\left(\left(b.x-c.x\right)^{2}\right)+\left(\left(b.y-c.y\right)^{2}\right)}\]
+            \[B_{i}=\sqrt{\left(\left(a.x-c.x\right)^{2}\right)+\left(\left(a.y-c.y\right)^{2}\right)}\]
+            \[C_{i}=\sqrt{\left(\left(a.x-b.x\right)^{2}\right)+\left(\left(a.y-b.y\right)^{2}\right)}\]
+        </div>
+        <p>With these calculations, you can calculate the radius of the incircle as well as the position.</p>
+        <p>For the position of the incircle, we will define it as \(i\).</p>
+        <div class="formula">
+        \[i=\left(\frac{\left(A_{i}\cdot a.x\right)+\left(B_{i}\cdot b.x\right)+\left(C_{i}\cdot c.x\right)}{A_{i}+B_{i}+C_{i}},\frac{\left(A_{i}\cdot a.y\right)+\left(B_{i}\cdot b.y\right)+\left(C_{i}\cdot c.y\right)}{A_{i}+B_{i}+C_{i}}\right)\]
+        </div>
+        <p>For the radius of the incircle, we can define \(r_i\) as the following.</p>
+        <div class="formula">
+        \[r_{i}=\sqrt{\frac{\left(\frac{A_{i}+B_{i}+C_{i}}{2}-A_{i}\right)\left(\frac{A_{i}+B_{i}+C_{i}}{2}-B_{i}\right)\left(\frac{A_{i}+B_{i}+C_{i}}{2}-C_{i}\right)}{\frac{A_{i}+B_{i}+C_{i}}{2}}}\]
+        </div>
+        <p>Now we can display the incircle.</p>
+        <div class="formula">
+        \[\left(x-i.x\right)^{2}+\left(y-i.y\right)^{2}=r_{i}^{2}\]
+        </div>
+
+        <hr>
+
+        <h2>Circumcircle Calculations</h2>
+        <p>Now, the circumcircle. Arguably the most challenging part in trigonometry. Try to follow along.</p>
+        <p>The position of the circumcircle is the intersection of two of the centerlines. The size of the circumcircle is the size in which the diameter touches \(a\), \(b\), and \(c\).</p>
+        <p>Firstly, we will calculate \(A_k\), \(B_k\), and \(C_k\).</p>
+        <div class="formula">
+            \[A_{k} =\sqrt{\left(b.x-a.x\right)^{2}+\left(b.y-a.y\right)^{2}}\]
+            \[B_{k} =\sqrt{\left(c.x-b.x\right)^{2}+\left(c.y-b.y\right)^{2}}\]
+            \[C_{k} =\sqrt{\left(a.x-c.x\right)^{2}+\left(a.y-c.y\right)^{2}}\]
+        </div>
+        <p>Then we can calculate the circles radius as \(r_k\).</p>
+        <div class="formula">
+        \[r_{k}=\frac{A_{k}B_{k}C_{k}}{4\sqrt{\frac{\left(A_{k}+B_{k}+C_{k}\right)}{2}\left(\left(\frac{\left(A_{k}+B_{k}+C_{k}\right)}{2}-A_{k}\right)\left(\frac{\left(A_{k}+B_{k}+C_{k}\right)}{2}-B_{k}\right)\left(\frac{\left(A_{k}+B_{k}+C_{k}\right)}{2}-C_{k}\right)\right)}}\]
+        </div>
+        <p>Then we can calculate the position.</p>
+        <div class="formula">
+        \[X_{k}=\frac{\left(a.x^{2}+a.y^{2}\right)\left(c.y-b.y\right)+\left(b.x^{2}+b.y^{2}\right)\left(a.y-c.y\right)+\left(c.x^{2}+c.y^{2}\right)\left(b.y-a.y\right)}{2\left(\left(b.x-a.x\right)\left(a.y-c.y\right)-\left(a.x-c.x\right)\left(b.y-a.y\right)\right)}\]
+        \[Y_{k}=\frac{\left(a.x^{2}+a.y^{2}\right)\left(b.x-c.x\right)+\left(b.x^{2}+b.y^{2}\right)\left(c.x-a.x\right)+\left(c.x^{2}+c.y^{2}\right)\left(a.x-b.x\right)}{2\left(\left(b.x-a.x\right)\left(a.y-c.y\right)-\left(a.x-c.x\right)\left(b.y-a.y\right)\right)}\]
+        </div>
+        <p>(You could define this as one variable but this is far more readable.)</p>
+        <p>Now we can display the circumcircle.</p>
+        <div class="formula">
+        \[\left(x-X_{k}\right)^{2}+\left(y-Y_{k}\right)^{2}=r_{k}^{2}\]
+        </div>
+
+        <hr>
+
+        <p>Thank you for reading this article!</p>
+        <p>I have more lessons, just go <a href="/">here</a>.</p>
+    </div>
+</body>
+</html>
